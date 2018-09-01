@@ -17,8 +17,7 @@ export default class Scheduler extends Component {
         newTaskMessage:  '',
         tasksFilter:     '',
         isTasksFetching: false,
-        tasks:           [],
-        initialTasks: []
+        tasks:           []
     }
 
     componentDidMount () {
@@ -61,7 +60,6 @@ export default class Scheduler extends Component {
         const { initialTasks } = this.state;
 
         this.setState((prevState) => ({
-            tasks: sortTasksByGroup(initialTasks.filter((item) => item.message.toLowerCase().search(value.toLowerCase()) !== -1)),
             tasksFilter: value.toLowerCase()
         }));
     }
@@ -172,7 +170,9 @@ export default class Scheduler extends Component {
 
     render () {
         const { isTasksFetching, tasksFilter, newTaskMessage, tasks } = this.state;
-        const tasksJSX = tasks.map((task, index) => (
+        const tasksFiltered = sortTasksByGroup(tasks.filter((item) => item.message.toLowerCase().search(tasksFilter.toLowerCase()) !== -1));
+        
+        const tasksJSX = tasksFiltered.map((task, index) => (
             <Task
                 key = { task.id }
                 _removeTaskAsync = { this._removeTaskAsync }

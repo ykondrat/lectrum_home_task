@@ -47,11 +47,12 @@ export default class Task extends PureComponent {
     taskInput = React.createRef();
 
     _setTaskEditingState = (bool) => {
-        if (bool) {
-            this._taskInputFocus();
-        }
         this.setState({
             isTaskEditing: bool
+        }, () => {
+            if (bool) {
+                this._taskInputFocus();
+            }
         })
     }
 
@@ -202,3 +203,18 @@ export default class Task extends PureComponent {
         );
     }
 }
+
+
+// // rest in JS
+// const user = {
+//     name: 'John',
+//     age: 23,
+//     street: 'Ololo'
+// }
+//
+// const { name, ...newObj } = user;
+//
+// newObj = {
+//     age: 23,
+//     street: 'Ololo'
+// }
